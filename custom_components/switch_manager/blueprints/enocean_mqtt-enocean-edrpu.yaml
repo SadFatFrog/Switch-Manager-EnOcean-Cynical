@@ -1,0 +1,159 @@
+name: EnOcean (EDRPU)
+service: EnOcean MQTT
+event_type: mqtt
+mqtt_topic_format: enoceanmqtt/rockers/+
+buttons:
+  - x: 79 ## CIRCLE
+    y: 249
+    width: 171
+    height: 173
+    actions:
+      - title: init
+        conditions:
+          - key: R1
+            value: 0 ### == CIRCLE
+          - key: EB
+            value: 1
+          - key: SA
+            value: 0
+          - key: NU
+            value: true
+      - title: press
+        conditions: "{{ data.button_last_state[0].title == 'init' and data.NU == false and (data.timestamp - data.button_last_state[0].timestamp < 1) }}"
+      - title: hold (released)
+        conditions: "{{ data.button_last_state[0].title == 'init' and data.NU == false and (data.timestamp - data.button_last_state[0].timestamp >= 1) }}"
+  - x: 79 ## STAR
+    y: 76
+    width: 171
+    height: 173
+    actions:
+      - title: init
+        conditions:
+          - key: R1
+            value: 1 ### == STAR
+          - key: EB
+            value: 1
+          - key: SA
+            value: 0
+          - key: NU
+            value: true
+      - title: press
+        conditions: "{{ data.button_last_state[1].title == 'init' and data.NU == false and (data.timestamp - data.button_last_state[1].timestamp < 1) }}"
+      - title: hold (released)
+        conditions: "{{ data.button_last_state[1].title == 'init' and data.NU == false and (data.timestamp - data.button_last_state[1].timestamp >= 1) }}"
+  - x: 250 ## MINUS
+    y: 249
+    width: 171
+    height: 173
+    actions:
+      - title: init
+        conditions:
+          - key: R1
+            value: 2 ### == MINUS
+          - key: EB
+            value: 1
+          - key: SA
+            value: 0
+          - key: NU
+            value: true
+      - title: press
+        conditions: "{{ data.button_last_state[2].title == 'init' and data.NU == false and (data.timestamp - data.button_last_state[2].timestamp < 1) }}"
+      - title: hold (released)
+        conditions: "{{ data.button_last_state[2].title == 'init' and data.NU == false and (data.timestamp - data.button_last_state[2].timestamp >= 1) }}"
+  - x: 250 ## PLUS
+    y: 76
+    width: 171
+    height: 173
+    actions:
+      - title: init
+        conditions:
+          - key: R1
+            value: 3 ### == PLUS
+          - key: EB
+            value: 1
+          - key: SA
+            value: 0
+          - key: NU
+            value: true
+      - title: press
+        conditions: "{{ data.button_last_state[3].title == 'init' and data.NU == false and (data.timestamp - data.button_last_state[3].timestamp < 1) }}"
+      - title: hold (released)
+        conditions: "{{ data.button_last_state[3].title == 'init' and data.NU == false and (data.timestamp - data.button_last_state[3].timestamp >= 1) }}"
+  - x: 250 ## STAR + PLUS
+    y: 162
+    width: 40
+    actions:
+      - title: both init
+        conditions:
+          - key: R1
+            value: 1 ### == STAR
+          - key: R2
+            value: 3 ### == PLUS
+          - key: EB
+            value: 1
+          - key: SA
+            value: 1
+          - key: NU
+            value: true
+      - title: both press
+        conditions: "{{ data.button_last_state[4].title == 'both init' and data.NU == false and (data.timestamp - data.button_last_state[4].timestamp < 1) }}"
+      - title: hold (released)
+        conditions: "{{ data.button_last_state[4].title == 'both init' and data.NU == false and (data.timestamp - data.button_last_state[4].timestamp >= 1) }}"
+  - x: 250 ## CIRCLE + MINUS
+    y: 336
+    width: 40
+    actions:
+      - title: both init
+        conditions:
+          - key: R1
+            value: 0 ### == CIRCLE
+          - key: R2
+            value: 2 ### == MINUS
+          - key: EB
+            value: 1
+          - key: SA
+            value: 1
+          - key: NU
+            value: true
+      - title: both press
+        conditions: "{{ data.button_last_state[5].title == 'both init' and data.NU == false and (data.timestamp - data.button_last_state[5].timestamp < 1) }}"
+      - title: hold (released)
+        conditions: "{{ data.button_last_state[5].title == 'both init' and data.NU == false and (data.timestamp - data.button_last_state[5].timestamp >= 1) }}"
+## CIRCLE + PLUS
+  - d: M250.5 249.526V210C265 210 290 222.544 290 249.526H250.5ZM250.5 249.526V290C228 289.001 211 273.011 210 249.526H250.5Z
+    actions:
+      - title: both init
+        conditions:
+          - key: R1
+            value: 0 ### == CIRCLE
+          - key: R2
+            value: 3 ### == PLUS
+          - key: EB
+            value: 1
+          - key: SA
+            value: 1
+          - key: NU
+            value: true
+      - title: both press
+        conditions: "{{ data.button_last_state[6].title == 'both init' and data.NU == false and (data.timestamp - data.button_last_state[6].timestamp < 1) }}"
+      - title: hold (released)
+        conditions: "{{ data.button_last_state[6].title == 'both init' and data.NU == false and (data.timestamp - data.button_last_state[6].timestamp >= 1) }}"
+## STAR + MINUS
+  - d: M250.5 249.526V210C236 210 210 222.544 210 249.526H250.5ZM250.5 249.526V290C273 289.001 289 273.011 290 249.526H250.5Z
+    actions:
+      - title: both init
+        conditions:
+          - key: R1
+            value: 1 ### == STAR
+          - key: R2
+            value: 2 ### == MINUS
+          - key: EB
+            value: 1
+          - key: SA
+            value: 1
+          - key: NU
+            value: true
+      - title: both press
+        conditions: "{{ data.button_last_state[7].title == 'both init' and data.NU == false and (data.timestamp - data.button_last_state[7].timestamp < 1) }}"
+      - title: hold (released)
+        conditions: "{{ data.button_last_state[7].title == 'both init' and data.NU == false and (data.timestamp - data.button_last_state[7].timestamp >= 1) }}"
